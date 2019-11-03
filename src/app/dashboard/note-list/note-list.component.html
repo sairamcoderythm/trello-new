@@ -1,0 +1,51 @@
+
+<div class="card1" >
+    <mat-card class="example-card ">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>CreateDashboard</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+          <form novalidate
+              [formGroup]="saveForm">
+        <!-- <div class="example-container">
+          <mat-form-field>
+            <textarea matInput placeholder="Name"></textarea>
+          </mat-form-field>
+        </div> -->
+        <div class="form-group row mb-2">
+            <label class="col-md-2 col-form-label"
+                   for="firstNameId">Name</label>
+            <div class="col-md-8">
+              <input class="form-control"
+                     id="firstNameId"
+                     type="text"
+                     placeholder="First Name (required)"
+                     formControlName="name"
+                     [ngClass]="{'is-invalid': (saveForm.get('name').touched ||
+                                                saveForm.get('name').dirty) &&
+                                                !saveForm.get('name').valid }" />
+              <span class="invalid-feedback">
+                <span *ngIf="saveForm.get('name').errors?.required">
+                  Please enter your first name.
+                </span>
+                <span *ngIf="saveForm.get('name').errors?.minlength">
+                  The first name must be longer than 3 characters.
+                </span>
+              </span>
+            </div>
+          </div>
+          </form>
+
+      </mat-card-content>
+      <mat-card-actions>
+      <button mat-raised-button color="accent" (click)='save()' [disabled]="!saveForm.valid">Save</button>
+      </mat-card-actions>
+      <h4 *ngFor='let listdata of noteListData'>
+        {{listdata.name}}
+      </h4>
+    </mat-card>
+
+  </div>
+<!-- <button (click)="removeMe(index)">I am a Child component, click to Remove
+  </button> -->

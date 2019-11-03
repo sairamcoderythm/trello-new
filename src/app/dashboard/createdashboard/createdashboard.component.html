@@ -1,0 +1,58 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>CreateDashboard</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+      <form novalidate
+          [formGroup]="saveForm">
+    <!-- <div class="example-container">
+      <mat-form-field>
+        <textarea matInput placeholder="Name"></textarea>
+      </mat-form-field>
+    </div> -->
+    <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label"
+               for="firstNameId">Name</label>
+        <div class="col-md-8">
+          <input class="form-control"
+                 id="firstNameId"
+                 type="text"
+                 placeholder="First Name (required)"
+                 formControlName="name"
+                 [ngClass]="{'is-invalid': (saveForm.get('name').touched ||
+                                            saveForm.get('name').dirty) &&
+                                            !saveForm.get('name').valid }" />
+          <span class="invalid-feedback">
+            <span *ngIf="saveForm.get('name').errors?.required">
+              Please enter your first name.
+            </span>
+            <span *ngIf="saveForm.get('name').errors?.minlength">
+              The first name must be longer than 3 characters.
+            </span>
+          </span>
+        </div>
+      </div>
+      </form>
+  </mat-card-content>
+  <mat-card-actions>
+  <button mat-raised-button color="primary">Cancel</button>
+  <button mat-raised-button color="accent" (click)='save()' [disabled]="!saveForm.valid">Save</button>
+  </mat-card-actions>
+</mat-card>
+
+<div *ngIf='dashboard'>
+    <mat-card class="example-card1" *ngFor='let list of dashboard'>
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>{{list.name}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-actions>
+            <button mat-raised-button color="primary" (click)='getDashboard(list.id)'><i class="material-icons">edit</i></button>
+            <button mat-raised-button color="accent" (click)='deleteDashboard(list.id)'> <mat-icon>delete</mat-icon></button>
+            <button mat-raised-button color="warn" [routerLink]="['/dashboards', list.id]"><mat-icon>view_list</mat-icon></button>
+        </mat-card-actions>
+      </mat-card>
+</div>
+
+
